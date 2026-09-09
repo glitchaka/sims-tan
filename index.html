@@ -10,88 +10,11 @@
 </head>
 <body>
 <div id="game" aria-label="Sims Tan"></div>
-
-<div id="menu" class="screen menu-screen">
-  <section class="pixel-panel main-menu">
-    <div class="logo-row"><span class="plumbob">◆</span><div><h1>SIMS TAN</h1><p>VIDAS PEQUEÑAS · HISTORIAS GRANDES</p></div></div>
-    <button data-go="game" class="gold">CONTINUAR</button>
-    <button data-go="creator">NUEVO JUEGO</button>
-    <button data-go="creator">CREAR PERSONAJE</button>
-    <button data-go="multi">MULTIJUGADOR</button>
-    <button id="resetBtn">REINICIAR PARTIDA</button>
-    <small>Un hogar acogedor, una vida propia.</small>
-  </section>
-</div>
-
-<div id="creator" class="screen hidden creator-screen">
-  <nav class="creator-tabs pixel-panel">
-    <button class="active" data-tab="basic">☺<span>BÁSICO</span></button>
-    <button data-tab="hair">♟<span>CABELLO</span></button>
-    <button data-tab="body">♙<span>CUERPO</span></button>
-    <button data-tab="style">◆<span>ESTILO</span></button>
-    <button data-tab="personality">✦<span>RASGOS</span></button>
-  </nav>
-  <div class="creator-title">CREA TU HABITANTE</div>
-  <aside class="creator-panel pixel-panel">
-    <header><h2>CREAR PERSONAJE</h2><p>El personaje se actualiza en tiempo real.</p></header>
-    <div class="creator-page" data-page="basic">
-      <label>NOMBRE<input id="charName" value="Valentina" maxlength="22" /></label>
-      <label>GÉNERO<select id="gender"><option value="fem">Femenino</option><option value="masc">Masculino</option></select></label>
-      <h3>TONO DE PIEL</h3><div id="skinPalette" class="palette"></div>
-      <h3>OJOS</h3><div id="eyePalette" class="palette"></div>
-    </div>
-    <div class="creator-page hidden" data-page="hair">
-      <label>PEINADO<select id="hairStyle"><option value="0">Largo</option><option value="1">Recogido</option><option value="2">Corto</option><option value="3">Ondulado</option></select></label>
-      <h3>COLOR</h3><div id="hairPalette" class="palette"></div>
-    </div>
-    <div class="creator-page hidden" data-page="body">
-      <label>COMPLEXIÓN<input id="bodySize" type="range" min="82" max="120" value="100" /></label>
-      <label>ESTATURA<input id="height" type="range" min="90" max="112" value="100" /></label>
-    </div>
-    <div class="creator-page hidden" data-page="style">
-      <label>ATUENDO<select id="outfit"><option value="0">Bosque</option><option value="1">Arcilla</option><option value="2">Noche</option><option value="3">Crema</option></select></label>
-      <h3>COLOR DE ROPA</h3><div id="outfitPalette" class="palette"></div>
-    </div>
-    <div class="creator-page hidden" data-page="personality">
-      <label>RASGO<select id="trait"><option>Sociable</option><option>Creativa</option><option>Ambiciosa</option><option>Tranquila</option><option>Solitario</option></select></label>
-      <label>ASPIRACIÓN<select id="aspiration"><option>Vida equilibrada</option><option>Gran familia</option><option>Creatividad</option><option>Éxito profesional</option></select></label>
-    </div>
-    <footer><button data-go="menu">VOLVER</button><button id="enterHome" class="gold">ENTRAR AL HOGAR</button></footer>
-  </aside>
-</div>
-
-<div id="multi" class="screen hidden">
-  <section class="pixel-panel multiplayer">
-    <h2>MULTIJUGADOR</h2>
-    <p>Comparte una sala para jugar en el mismo hogar.</p>
-    <div class="friends"><div><b>AlexR</b><span>En su casa</span></div><div><b>SofiGame</b><span>Decorando</span></div><div><b>Leo_tw</b><span>Explorando</span></div></div>
-    <label>CÓDIGO DE SALA<input id="roomCode" placeholder="SIM-0000" /></label>
-    <div class="row"><button id="makeRoom" class="gold">CREAR SALA</button><button id="joinRoom">UNIRSE</button></div>
-    <p id="netStatus" class="status">Sin conexión.</p>
-    <button data-go="menu">VOLVER</button>
-  </section>
-</div>
-
-<div id="hud" class="hidden">
-  <section class="pixel-panel profile">
-    <div id="portrait" class="portrait"></div>
-    <div><strong id="hudName">Valentina</strong><small id="activity">En casa</small></div>
-    <div class="needs">
-      <label>ENERGÍA<i><b id="energyBar"></b></i></label>
-      <label>HAMBRE<i><b id="hungerBar"></b></i></label>
-      <label>HIGIENE<i><b id="hygieneBar"></b></i></label>
-      <label>DIVERSIÓN<i><b id="funBar"></b></i></label>
-      <label>VEJIGA<i><b id="bladderBar"></b></i></label>
-    </div>
-  </section>
-  <section class="pixel-panel topbar"><span>◆ CASA DE <b id="houseName">VALENTINA</b></span><span id="clockText">Mar · 14:40</span><span>§ 2.450</span></section>
-  <section id="context" class="pixel-panel context hidden"><h3 id="contextTitle">OBJETO</h3><p id="contextDesc"></p><div id="contextActions"></div></section>
-  <nav class="pixel-panel dock"><button data-quick="tv">▣<span>TV</span></button><button data-quick="bed">▰<span>DORMIR</span></button><button data-quick="shower">♨<span>DUCHA</span></button><button data-quick="toilet">◉<span>BAÑO</span></button><button id="editBtn">☺<span>PERSONAJE</span></button><button data-go="menu">☰<span>MENÚ</span></button></nav>
-  <div class="hint">CLIC EN SUELO PARA CAMINAR · CLIC EN MUEBLES PARA INTERACTUAR · WASD</div>
-  <div class="mobile-pad"><button data-dir="up">▲</button><button data-dir="left">◀</button><button data-dir="right">▶</button><button data-dir="down">▼</button></div>
-</div>
-
+<div id="menu" class="screen menu-screen"><section class="pixel-panel main-menu"><div class="logo-row"><span class="plumbob">◆</span><div><h1>SIMS TAN</h1><p>VIDAS PEQUEÑAS · HISTORIAS GRANDES</p></div></div><button data-go="game" class="gold">CONTINUAR</button><button data-go="creator">NUEVO JUEGO</button><button data-go="creator">CREAR PERSONAJE</button><button data-go="multi">MULTIJUGADOR</button><button id="resetBtn">REINICIAR PARTIDA</button><small>Un hogar acogedor, una vida propia.</small></section></div>
+<div id="creator" class="screen hidden creator-screen"><nav class="creator-tabs pixel-panel"><button class="active" data-tab="basic">☺<span>BÁSICO</span></button><button data-tab="hair">♟<span>CABELLO</span></button><button data-tab="body">♙<span>CUERPO</span></button><button data-tab="style">◆<span>ESTILO</span></button><button data-tab="personality">✦<span>RASGOS</span></button></nav><div class="creator-title">CREA TU HABITANTE</div><aside class="creator-panel pixel-panel"><header><h2>CREAR PERSONAJE</h2><p>El personaje se actualiza en tiempo real.</p></header><div class="creator-page" data-page="basic"><label>NOMBRE<input id="charName" value="Valentina" maxlength="22" /></label><label>GÉNERO<select id="gender"><option value="fem">Femenino</option><option value="masc">Masculino</option></select></label><h3>TONO DE PIEL</h3><div id="skinPalette" class="palette"></div><h3>OJOS</h3><div id="eyePalette" class="palette"></div></div><div class="creator-page hidden" data-page="hair"><label>PEINADO<select id="hairStyle"><option value="0">Largo</option><option value="1">Recogido</option><option value="2">Corto</option><option value="3">Ondulado</option></select></label><h3>COLOR</h3><div id="hairPalette" class="palette"></div></div><div class="creator-page hidden" data-page="body"><label>COMPLEXIÓN<input id="bodySize" type="range" min="82" max="120" value="100" /></label><label>ESTATURA<input id="height" type="range" min="90" max="112" value="100" /></label></div><div class="creator-page hidden" data-page="style"><label>ATUENDO<select id="outfit"><option value="0">Bosque</option><option value="1">Arcilla</option><option value="2">Noche</option><option value="3">Crema</option></select></label><h3>COLOR DE ROPA</h3><div id="outfitPalette" class="palette"></div></div><div class="creator-page hidden" data-page="personality"><label>RASGO<select id="trait"><option>Sociable</option><option>Creativa</option><option>Ambiciosa</option><option>Tranquila</option><option>Solitario</option></select></label><label>ASPIRACIÓN<select id="aspiration"><option>Vida equilibrada</option><option>Gran familia</option><option>Creatividad</option><option>Éxito profesional</option></select></label></div><footer><button data-go="menu">VOLVER</button><button id="enterHome" class="gold">ENTRAR AL HOGAR</button></footer></aside></div>
+<div id="multi" class="screen hidden"><section class="pixel-panel multiplayer"><h2>MULTIJUGADOR</h2><p>Comparte una sala para jugar en el mismo hogar.</p><div class="friends"><div><b>AlexR</b><span>En su casa</span></div><div><b>SofiGame</b><span>Decorando</span></div><div><b>Leo_tw</b><span>Explorando</span></div></div><label>CÓDIGO DE SALA<input id="roomCode" placeholder="SIM-0000" /></label><div class="row"><button id="makeRoom" class="gold">CREAR SALA</button><button id="joinRoom">UNIRSE</button></div><p id="netStatus" class="status">Sin conexión.</p><button data-go="menu">VOLVER</button></section></div>
+<div id="hud" class="hidden"><section class="pixel-panel profile"><div id="portrait" class="portrait"></div><div><strong id="hudName">Valentina</strong><small id="activity">En casa</small></div><div class="needs"><label>ENERGÍA<i><b id="energyBar"></b></i></label><label>HAMBRE<i><b id="hungerBar"></b></i></label><label>HIGIENE<i><b id="hygieneBar"></b></i></label><label>DIVERSIÓN<i><b id="funBar"></b></i></label><label>VEJIGA<i><b id="bladderBar"></b></i></label></div></section><section class="pixel-panel topbar"><span>◆ CASA DE <b id="houseName">VALENTINA</b></span><span id="clockText">Mar · 14:40</span><span>§ 2.450</span></section><section id="context" class="pixel-panel context hidden"><h3 id="contextTitle">OBJETO</h3><p id="contextDesc"></p><div id="contextActions"></div></section><nav class="pixel-panel dock"><button data-quick="tv">▣<span>TV</span></button><button data-quick="bed">▰<span>DORMIR</span></button><button data-quick="shower">♨<span>DUCHA</span></button><button data-quick="toilet">◉<span>BAÑO</span></button><button id="editBtn">☺<span>PERSONAJE</span></button><button data-go="menu">☰<span>MENÚ</span></button></nav><div class="hint">CLIC EN SUELO PARA CAMINAR · CLIC EN MUEBLES PARA INTERACTUAR · WASD</div><div class="mobile-pad"><button data-dir="up">▲</button><button data-dir="left">◀</button><button data-dir="right">▶</button><button data-dir="down">▼</button></div></div>
 <div id="toast" class="toast">Listo</div>
-<script type="module" src="./game.js"></script>
+<script type="module" src="./premium-overrides.js"></script>
 </body>
 </html>
