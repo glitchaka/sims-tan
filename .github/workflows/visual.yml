@@ -27,24 +27,25 @@ jobs:
           import { createRequire } from 'node:module';
           const require=createRequire(import.meta.url);
           const { chromium }=require('/tmp/visual/node_modules/playwright-core');
-          const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});
+          const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
           const page=await browser.newPage({viewport:{width:1600,height:900},deviceScaleFactor:1});
-          await page.goto('http://127.0.0.1:8000/',{waitUntil:'domcontentloaded',timeout:30000});
-          await page.waitForSelector('#game canvas',{timeout:45000});
-          await page.waitForTimeout(5000);
-          await page.screenshot({path:'menu.png',fullPage:true});
-          await page.click('#newGameBtn');
-          await page.waitForTimeout(6500);
-          await page.screenshot({path:'creator.png',fullPage:true});
-          await page.click('#enterHome');
-          await page.waitForTimeout(3000);
-          await page.screenshot({path:'game.png',fullPage:true});
+          page.setDefaultTimeout(120000);
+          await page.goto('http://127.0.0.1:8000/',{waitUntil:'domcontentloaded',timeout:60000});
+          await page.waitForSelector('#game canvas',{timeout:60000});
+          await page.click('#newGameBtn',{force:true});
+          await page.waitForFunction(()=>!document.querySelector('#creatorScreen').classList.contains('hidden'),null,{timeout:30000});
+          await page.waitForFunction(()=>document.querySelector('#creatorLoading').textContent.includes('listo'),null,{timeout:90000}).catch(()=>{});
+          await page.waitForTimeout(1500);
+          await page.screenshot({path:'creator.png',animations:'disabled',timeout:120000});
+          await page.click('#enterHome',{force:true});
+          await page.waitForFunction(()=>!document.querySelector('#hud').classList.contains('hidden'),null,{timeout:90000});
+          await page.waitForTimeout(1500);
+          await page.screenshot({path:'game.png',animations:'disabled',timeout:120000});
           await browser.close();
           EOF
       - uses: actions/upload-artifact@v4
         with:
           name: visual-capture
           path: |
-            menu.png
             creator.png
             game.png
