@@ -1,0 +1,50 @@
+name: Visual Capture
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: sims-tan-visual
+  cancel-in-progress: true
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser driver
+        run: |
+          mkdir -p /tmp/visual
+          cd /tmp/visual
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund playwright-core@1.55.0
+      - name: Start static server
+        run: |
+          python3 -m http.server 8000 >/tmp/sims-tan-http.log 2>&1 &
+          sleep 2
+      - name: Capture creator and gameplay
+        run: |
+          node --input-type=module <<'EOF'
+          import { createRequire } from 'node:module';
+          const require=createRequire(import.meta.url);
+          const { chromium }=require('/tmp/visual/node_modules/playwright-core');
+          const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});
+          const page=await browser.newPage({viewport:{width:1600,height:900},deviceScaleFactor:1});
+          await page.goto('http://127.0.0.1:8000/',{waitUntil:'domcontentloaded',timeout:30000});
+          await page.waitForSelector('#game canvas',{timeout:45000});
+          await page.waitForTimeout(5000);
+          await page.screenshot({path:'menu.png',fullPage:true});
+          await page.click('#newGameBtn');
+          await page.waitForTimeout(6500);
+          await page.screenshot({path:'creator.png',fullPage:true});
+          await page.click('#enterHome');
+          await page.waitForTimeout(3000);
+          await page.screenshot({path:'game.png',fullPage:true});
+          await browser.close();
+          EOF
+      - uses: actions/upload-artifact@v4
+        with:
+          name: visual-capture
+          path: |
+            menu.png
+            creator.png
+            game.png
