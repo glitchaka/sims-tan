@@ -24,8 +24,8 @@ jobs:
           grep -q 'Televisor' game-real.js
           grep -q 'Ducha' game-real.js
           grep -q 'Cama' game-real.js
-          grep -q 'vitruvian_body.glb' premium-overrides.js
-          grep -q 'vitruvian_head.glb' premium-overrides.js
+          grep -q 'female.glb' premium-overrides.js
+          grep -q 'male.glb' premium-overrides.js
           grep -q 'Multijugador' index.html
       - name: Verify public no-login CDN URL
         run: |
