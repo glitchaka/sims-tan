@@ -1,0 +1,38 @@
+name: Browser Smoke Test
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser driver
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Start static server
+        run: |
+          python3 -m http.server 8000 >/tmp/sims-tan-http.log 2>&1 &
+          sleep 2
+      - name: Exercise menu, creator and game
+        run: |
+          node --input-type=module <<'EOF'
+          import { chromium } from 'playwright-core';
+          const browser = await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});
+          const page = await browser.newPage({viewport:{width:1440,height:900}});
+          const fatal=[];
+          page.on('pageerror',e=>fatal.push(String(e)));
+          page.on('console',m=>{ if(m.type()==='error') fatal.push(m.text()) });
+          await page.goto('http://127.0.0.1:8000/',{waitUntil:'networkidle',timeout:60000});
+          await page.waitForSelector('#game canvas',{timeout:30000});
+          await page.click('#newGameBtn');
+          await page.waitForFunction(()=>!document.querySelector('#creatorScreen').classList.contains('hidden'));
+          await page.click('#enterHome');
+          await page.waitForFunction(()=>!document.querySelector('#hud').classList.contains('hidden'));
+          await page.keyboard.down('w'); await page.waitForTimeout(500); await page.keyboard.up('w');
+          await page.waitForTimeout(500);
+          const visible=await page.locator('#hud').isVisible();
+          if(!visible) throw new Error('HUD did not become visible');
+          if(fatal.length) throw new Error('Browser errors: '+fatal.join(' | '));
+          await browser.close();
+          EOF
