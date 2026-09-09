@@ -16,10 +16,10 @@ jobs:
           test -s style.css
           test -s game.js
           grep -q 'type="module" src="./game.js"' index.html
+          grep -q "getContext('2d')" game.js
           grep -q 'Televisor' game.js
           grep -q 'Ducha' game.js
           grep -q 'Cama' game.js
-          grep -q 'THREE.OrthographicCamera' game.js
           grep -q 'CREAR PERSONAJE' index.html
       - name: Verify public no-login build
         run: |
