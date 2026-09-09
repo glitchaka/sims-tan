@@ -3,115 +3,94 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
-<meta name="theme-color" content="#111418" />
+<meta name="theme-color" content="#91ab88" />
 <title>Sims Tan</title>
 <link rel="icon" href="data:," />
 <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-<div id="game" aria-label="Escena 3D de Sims Tan"></div>
-<div class="ui">
-  <div id="menuScreen" class="screen menu-screen">
-    <div class="cover-menu-bg"></div>
-    <section class="main-menu panel">
-      <div class="brand"><div class="brand-mark"></div><div class="brand-title">SIMS <b>TAN</b></div></div>
-      <p class="tagline">Más que una vida, tus historias.</p>
-      <div class="menu-list">
-        <button id="continueBtn" class="primary">Continuar</button>
-        <button id="newGameBtn">Nuevo juego</button>
-        <button id="multiplayerBtn">Multijugador</button>
-        <button id="createBtn">Crear personaje</button>
-        <button id="settingsBtn">Ajustes</button>
-      </div>
-      <div class="menu-foot">Gente real. Historias infinitas.</div>
-    </section>
-  </div>
+<canvas id="game" width="640" height="360" aria-label="Sims Tan pixel art"></canvas>
 
-  <div id="creatorScreen" class="screen creator-screen hidden">
-    <nav class="creator-nav panel" aria-label="Categorías de creación">
-      <button class="on" data-tab="basic"><span class="ico">●</span><span>Básico</span></button>
-      <button data-tab="face"><span class="ico">◉</span><span>Rostro</span></button>
-      <button data-tab="hair"><span class="ico">◒</span><span>Cabello</span></button>
-      <button data-tab="body"><span class="ico">♙</span><span>Cuerpo</span></button>
-      <button data-tab="style"><span class="ico">◆</span><span>Estilo</span></button>
-      <button data-tab="personality"><span class="ico">✦</span><span>Personalidad</span></button>
-    </nav>
-    <div class="creator-stage"><div class="stage-note">Arrastra para girar · pellizca o rueda para zoom</div></div>
-    <aside class="creator-panel panel">
-      <h2>Crear personaje</h2>
-      <div id="tab-basic" class="creator-tab">
-        <label>Nombre<input id="charName" type="text" maxlength="24" value="Valentina" /></label>
-        <h3>Género</h3><div class="row"><button class="choice on" data-gender="fem">♀ Femenino</button><button class="choice" data-gender="masc">♂ Masculino</button></div>
-        <h3>Tono de piel</h3><div id="skinSwatches" class="swatches"></div>
-        <h3>Ojos</h3><div id="eyeSwatches" class="swatches"></div>
-      </div>
-      <div id="tab-face" class="creator-tab hidden">
-        <label>Anchura del rostro<input id="faceWidth" type="range" min="82" max="118" value="100" /></label>
-        <label>Mandíbula<input id="jaw" type="range" min="80" max="120" value="100" /></label>
-        <label>Tamaño de ojos<input id="eyeSize" type="range" min="85" max="120" value="100" /></label>
-      </div>
-      <div id="tab-hair" class="creator-tab hidden">
-        <h3>Color de cabello</h3><div id="hairSwatches" class="swatches"></div>
-        <label>Peinado<select id="hairStyle"><option value="0">Largo natural</option><option value="1">Recogido</option><option value="2">Corto</option></select></label>
-      </div>
-      <div id="tab-body" class="creator-tab hidden">
-        <label>Complexión<input id="bodySize" type="range" min="88" max="116" value="100" /></label>
-        <label>Estatura<input id="height" type="range" min="92" max="108" value="100" /></label>
-      </div>
-      <div id="tab-style" class="creator-tab hidden">
-        <label>Atuendo<select id="outfit"><option value="0">Casual neutro</option><option value="1">Nocturno</option><option value="2">Arena</option><option value="3">Oliva</option></select></label>
-        <h3>Color del atuendo</h3><div id="outfitSwatches" class="swatches"></div>
-      </div>
-      <div id="tab-personality" class="creator-tab hidden">
-        <label>Rasgo principal<select id="trait"><option>Sociable</option><option>Creativa</option><option>Ambiciosa</option><option>Tranquila</option><option>Solitario</option></select></label>
-        <label>Objetivo de vida<select id="aspiration"><option>Vida equilibrada</option><option>Éxito profesional</option><option>Gran familia</option><option>Creatividad</option></select></label>
-      </div>
-      <div id="creatorLoading" class="creator-loading">Cargando personaje 3D…</div>
-      <div class="creator-actions"><button id="creatorBack" class="btn secondary">Volver</button><button id="enterHome" class="btn">Continuar</button></div>
-    </aside>
-  </div>
-
-  <div id="multiplayerScreen" class="screen multiplayer-screen hidden">
-    <div class="lobby">
-      <section class="lobby-side panel">
-        <h2>Multijugador</h2>
-        <div class="tabs"><button class="on">Amigos</button><button>Servidores</button></div>
-        <div class="friend"><div class="pic"></div><div><b>AlexR</b><small>En su casa</small></div></div>
-        <div class="friend"><div class="pic"></div><div><b>SofiGame</b><small>Explorando la ciudad</small></div></div>
-        <div class="friend"><div class="pic"></div><div><b>Leo_tw</b><small>Decorando</small></div></div>
-        <button id="multiBack" class="back-link">Volver</button>
-      </section>
-      <section class="lobby-main panel">
-        <div class="share-card"><h3>Vive, comparte, construye juntos.</h3><p>Una habitación compartida en tiempo real entre dos navegadores.</p></div>
-        <div class="room-controls"><input id="roomCode" placeholder="Código de sala" autocomplete="off" /><button id="joinRoom">Unirse</button></div>
-        <button id="createRoom" class="btn">+ Crear sala</button>
-        <div id="networkStatus" class="network-status">Sin conexión.</div>
-      </section>
-    </div>
-  </div>
-
-  <div id="hud" class="hud hidden">
-    <section class="profile panel">
-      <div id="portrait" class="portrait"></div>
-      <div><strong id="hudName">Valentina</strong><div id="mood" class="mood">● Cómoda</div>
-        <div class="needs">
-          <div class="need"><span>Hambre</span><div class="meter"><i id="hungerBar"></i></div></div>
-          <div class="need"><span>Energía</span><div class="meter"><i id="energyBar"></i></div></div>
-          <div class="need"><span>Higiene</span><div class="meter"><i id="hygieneBar"></i></div></div>
-          <div class="need"><span>Vejiga</span><div class="meter"><i id="bladderBar"></i></div></div>
-          <div class="need"><span>Diversión</span><div class="meter"><i id="funBar"></i></div></div>
-          <div class="need"><span>Social</span><div class="meter"><i id="socialBar"></i></div></div>
-        </div>
-      </div>
-    </section>
-    <section class="clock panel"><div id="clockText" class="time">Lun 09:15</div><small>☀ Despejado</small><b>§ 2.450</b><div class="speed"><button data-speed="0">Ⅱ</button><button class="on" data-speed="1">▶</button><button data-speed="2">▶▶</button></div></section>
-    <section id="contextMenu" class="context panel"><h3 id="contextTitle">Objeto</h3><p id="contextDescription"></p><div id="contextActions"></div></section>
-    <nav class="bottom-dock panel"><button id="homeCamera" title="Vista del hogar">⌂</button><button id="socialBtn" title="Social">👥</button><button id="editCharacter" title="Editar personaje">👤</button><button id="menuBtn" title="Menú">•••</button></nav>
-    <div class="help">WASD/flechas · clic en suelo para caminar · clic en objetos para interactuar</div>
-    <div class="mobile-pad"><button class="up" data-dir="up">▲</button><button class="down" data-dir="down">▼</button><button class="left" data-dir="left">◀</button><button class="right" data-dir="right">▶</button></div>
-  </div>
-  <div id="toast" class="toast">Listo</div>
+<div id="menu" class="screen menu-screen">
+  <section class="pixel-panel main-menu">
+    <div class="logo-row"><span class="plumbob">◆</span><div><h1>SIMS TAN</h1><p>VIDAS PEQUEÑAS · HISTORIAS GRANDES</p></div></div>
+    <button data-go="game" class="gold">CONTINUAR</button>
+    <button data-go="creator">NUEVO JUEGO</button>
+    <button data-go="creator">CREAR PERSONAJE</button>
+    <button data-go="multi">MULTIJUGADOR</button>
+    <button id="resetBtn">REINICIAR PARTIDA</button>
+    <small>Un hogar acogedor, una vida propia.</small>
+  </section>
 </div>
-<script type="module" src="./bootstrap.js"></script>
+
+<div id="creator" class="screen hidden">
+  <nav class="creator-tabs pixel-panel">
+    <button class="active" data-tab="basic">☺<span>BÁSICO</span></button>
+    <button data-tab="hair">♟<span>CABELLO</span></button>
+    <button data-tab="body">♙<span>CUERPO</span></button>
+    <button data-tab="style">◆<span>ESTILO</span></button>
+    <button data-tab="personality">✦<span>RASGOS</span></button>
+  </nav>
+  <aside class="creator-panel pixel-panel">
+    <header><h2>CREAR PERSONAJE</h2><p>Tu habitante aparecerá en el mundo tal como lo dejes aquí.</p></header>
+    <div class="creator-page" data-page="basic">
+      <label>NOMBRE<input id="charName" value="Valentina" maxlength="22" /></label>
+      <label>GÉNERO<select id="gender"><option value="fem">Femenino</option><option value="masc">Masculino</option></select></label>
+      <h3>TONO DE PIEL</h3><div id="skinPalette" class="palette"></div>
+      <h3>OJOS</h3><div id="eyePalette" class="palette"></div>
+    </div>
+    <div class="creator-page hidden" data-page="hair">
+      <label>PEINADO<select id="hairStyle"><option value="0">Largo</option><option value="1">Recogido</option><option value="2">Corto</option><option value="3">Ondulado</option></select></label>
+      <h3>COLOR</h3><div id="hairPalette" class="palette"></div>
+    </div>
+    <div class="creator-page hidden" data-page="body">
+      <label>COMPLEXIÓN<input id="bodySize" type="range" min="82" max="120" value="100" /></label>
+      <label>ESTATURA<input id="height" type="range" min="90" max="112" value="100" /></label>
+    </div>
+    <div class="creator-page hidden" data-page="style">
+      <label>ATUENDO<select id="outfit"><option value="0">Bosque</option><option value="1">Arcilla</option><option value="2">Noche</option><option value="3">Crema</option></select></label>
+      <h3>COLOR DE ROPA</h3><div id="outfitPalette" class="palette"></div>
+    </div>
+    <div class="creator-page hidden" data-page="personality">
+      <label>RASGO<select id="trait"><option>Sociable</option><option>Creativa</option><option>Ambiciosa</option><option>Tranquila</option><option>Solitario</option></select></label>
+      <label>ASPIRACIÓN<select id="aspiration"><option>Vida equilibrada</option><option>Gran familia</option><option>Creatividad</option><option>Éxito profesional</option></select></label>
+    </div>
+    <footer><button data-go="menu">VOLVER</button><button id="enterHome" class="gold">ENTRAR AL HOGAR</button></footer>
+  </aside>
+</div>
+
+<div id="multi" class="screen hidden">
+  <section class="pixel-panel multiplayer">
+    <h2>MULTIJUGADOR</h2>
+    <p>Comparte una sala para jugar en el mismo hogar.</p>
+    <div class="friends"><div><b>AlexR</b><span>En su casa</span></div><div><b>SofiGame</b><span>Decorando</span></div><div><b>Leo_tw</b><span>Explorando</span></div></div>
+    <label>CÓDIGO DE SALA<input id="roomCode" placeholder="SIM-0000" /></label>
+    <div class="row"><button id="makeRoom" class="gold">CREAR SALA</button><button id="joinRoom">UNIRSE</button></div>
+    <p id="netStatus" class="status">Sin conexión.</p>
+    <button data-go="menu">VOLVER</button>
+  </section>
+</div>
+
+<div id="hud" class="hidden">
+  <section class="pixel-panel profile">
+    <div id="portrait" class="portrait"></div>
+    <div><strong id="hudName">Valentina</strong><small id="activity">En casa</small></div>
+    <div class="needs">
+      <label>ENERGÍA<i><b id="energyBar"></b></i></label>
+      <label>HAMBRE<i><b id="hungerBar"></b></i></label>
+      <label>HIGIENE<i><b id="hygieneBar"></b></i></label>
+      <label>DIVERSIÓN<i><b id="funBar"></b></i></label>
+      <label>VEJIGA<i><b id="bladderBar"></b></i></label>
+    </div>
+  </section>
+  <section class="pixel-panel topbar"><span>◆ CASA DE <b id="houseName">VALENTINA</b></span><span id="clockText">Mar · 14:40</span><span>§ 2.450</span></section>
+  <section id="context" class="pixel-panel context hidden"><h3 id="contextTitle">OBJETO</h3><p id="contextDesc"></p><div id="contextActions"></div></section>
+  <nav class="pixel-panel dock"><button data-quick="tv">▣<span>TV</span></button><button data-quick="bed">▰<span>DORMIR</span></button><button data-quick="shower">♨<span>DUCHA</span></button><button data-quick="toilet">◉<span>BAÑO</span></button><button id="editBtn">☺<span>PERSONAJE</span></button><button data-go="menu">☰<span>MENÚ</span></button></nav>
+  <div class="hint">CLIC EN EL SUELO PARA CAMINAR · CLIC EN MUEBLES PARA INTERACTUAR · WASD</div>
+  <div class="mobile-pad"><button data-dir="up">▲</button><button data-dir="left">◀</button><button data-dir="right">▶</button><button data-dir="down">▼</button></div>
+</div>
+
+<div id="toast" class="toast">Listo</div>
+<script src="./game.js"></script>
 </body>
 </html>
