@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
-<meta name="theme-color" content="#91ab88" />
+<meta name="theme-color" content="#7f9f79" />
 <title>Sims Tan</title>
 <link rel="icon" href="data:," />
 <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-<canvas id="game" width="640" height="360" aria-label="Sims Tan pixel art"></canvas>
+<div id="game" aria-label="Sims Tan"></div>
 
 <div id="menu" class="screen menu-screen">
   <section class="pixel-panel main-menu">
@@ -23,7 +23,7 @@
   </section>
 </div>
 
-<div id="creator" class="screen hidden">
+<div id="creator" class="screen hidden creator-screen">
   <nav class="creator-tabs pixel-panel">
     <button class="active" data-tab="basic">☺<span>BÁSICO</span></button>
     <button data-tab="hair">♟<span>CABELLO</span></button>
@@ -31,8 +31,9 @@
     <button data-tab="style">◆<span>ESTILO</span></button>
     <button data-tab="personality">✦<span>RASGOS</span></button>
   </nav>
+  <div class="creator-title">CREA TU HABITANTE</div>
   <aside class="creator-panel pixel-panel">
-    <header><h2>CREAR PERSONAJE</h2><p>Tu habitante aparecerá en el mundo tal como lo dejes aquí.</p></header>
+    <header><h2>CREAR PERSONAJE</h2><p>El personaje se actualiza en tiempo real.</p></header>
     <div class="creator-page" data-page="basic">
       <label>NOMBRE<input id="charName" value="Valentina" maxlength="22" /></label>
       <label>GÉNERO<select id="gender"><option value="fem">Femenino</option><option value="masc">Masculino</option></select></label>
@@ -86,11 +87,11 @@
   <section class="pixel-panel topbar"><span>◆ CASA DE <b id="houseName">VALENTINA</b></span><span id="clockText">Mar · 14:40</span><span>§ 2.450</span></section>
   <section id="context" class="pixel-panel context hidden"><h3 id="contextTitle">OBJETO</h3><p id="contextDesc"></p><div id="contextActions"></div></section>
   <nav class="pixel-panel dock"><button data-quick="tv">▣<span>TV</span></button><button data-quick="bed">▰<span>DORMIR</span></button><button data-quick="shower">♨<span>DUCHA</span></button><button data-quick="toilet">◉<span>BAÑO</span></button><button id="editBtn">☺<span>PERSONAJE</span></button><button data-go="menu">☰<span>MENÚ</span></button></nav>
-  <div class="hint">CLIC EN EL SUELO PARA CAMINAR · CLIC EN MUEBLES PARA INTERACTUAR · WASD</div>
+  <div class="hint">CLIC EN SUELO PARA CAMINAR · CLIC EN MUEBLES PARA INTERACTUAR · WASD</div>
   <div class="mobile-pad"><button data-dir="up">▲</button><button data-dir="left">◀</button><button data-dir="right">▶</button><button data-dir="down">▼</button></div>
 </div>
 
 <div id="toast" class="toast">Listo</div>
-<script src="./game.js"></script>
+<script type="module" src="./game.js"></script>
 </body>
 </html>
