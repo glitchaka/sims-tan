@@ -9,23 +9,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check JavaScript syntax
-        run: node --input-type=module --check < game.js
+        run: node --input-type=module --check < premium-overrides.js
       - name: Verify playable entrypoint
         run: |
           test -s index.html
           test -s style.css
-          test -s game.js
-          grep -q 'type="module" src="./game.js"' index.html
-          grep -q "getContext('2d')" game.js
-          grep -q 'Televisor' game.js
-          grep -q 'Ducha' game.js
-          grep -q 'Cama' game.js
+          test -s premium-overrides.js
+          grep -q 'type="module" src="./premium-overrides.js"' index.html
+          grep -q "getContext('2d')" premium-overrides.js
+          grep -q 'Televisor' premium-overrides.js
+          grep -q 'Ducha' premium-overrides.js
+          grep -q 'Cama' premium-overrides.js
           grep -q 'CREAR PERSONAJE' index.html
       - name: Verify public no-login build
         run: |
           URL="https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}@${GITHUB_SHA}/index.html"
           for i in 1 2 3 4 5 6 7 8; do
-            if curl -fsSL --max-time 20 "$URL" | grep -q 'game.js'; then
+            if curl -fsSL --max-time 20 "$URL" | grep -q 'premium-overrides.js'; then
               echo "Public build available at $URL"
               exit 0
             fi
